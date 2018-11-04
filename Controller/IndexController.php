@@ -15,21 +15,14 @@ class IndexController extends ControllerAbstract
         $this->render('index.php');
     }
 
-    /**
-     * Display the template page.
-     */
-    public function page()
+    public function helloWorld()
     {
-        $this->render('page.php');
-    }
-
-    /**
-     * Display the template list.
-     */
-    public function list()
-    {
-        $this->vars = array('items' => ['Patrick', 'Claude', 'Pierre', 'André']);
-        $this->render('list.php');
+        $stmt = $this->db->pdo->prepare('SELECT texte FROM MESSAGE WHERE id=1');
+        $stmt->execute();
+        $message = $stmt->fetch();
+        $message = $message['texte'];
+        $this->vars = ['helloworld' => $message];
+        $this->render('helloworld.php');
     }
 
     /**
@@ -40,8 +33,4 @@ class IndexController extends ControllerAbstract
         $this->render('404.php');
     }
 
-    public function partieGary()
-    {
-        $this->render('gary.php');
-    }
 }

@@ -7,19 +7,21 @@ abstract class ControllerAbstract
 {
     protected $template_dir = 'Templates/';
     protected $vars = array();
+    protected $db;
 
     /**
      * ControllerAbstract constructor.
      *
      * @param null $template_dir
      */
-    public function __construct($template_dir = null)
+    public function __construct($template_dir = null, $db = null)
     {
         $this->vars = [];
         if ($template_dir !== null) {
             // Check here whether this directory really exists
             $this->template_dir = $template_dir;
         }
+        $this->db = $db;
     }
 
     /**

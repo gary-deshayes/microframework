@@ -15,7 +15,6 @@ include 'Request.php';
 //Initilisation des controllers
 include 'Controller/ControllerAbstract.php';
 include 'Controller/IndexController.php';
-include 'Controller/BackOfficeController.php';
 //Container de l'injection de dépendances
 include 'ContainerInterface.php';
 include 'Container.php';
@@ -32,7 +31,7 @@ $rendered = false;
 
 if (file_exists(sprintf('Controller/%s.php', $className))) {
     if (class_exists($className)) {
-        $controller = new $className();
+        $controller = new $className(null, $container->get('database'));
         $action = $request->get('action', 'index');
         if ($action && method_exists($controller, $action)) {
             $controller->$action();
